@@ -1,11 +1,11 @@
 #include "redismodule.h"
 #include "parser.h"
+#include "executor.h"
 
 int queryCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) {
     RedisModule_AutoMemory(ctx);
     CommandList *commands = parse(ctx, argv, argc);
-
-    return RedisModule_ReplyWithSimpleString(ctx, "OK");
+    return execute(ctx, commands);
 }
 
 int RedisModule_OnLoad(RedisModuleCtx *ctx) {

@@ -14,8 +14,8 @@ CommandList *parse(RedisModuleCtx *ctx, RedisModuleString **argv, int argc) {
             pushCommand(list, OPERATOR_CHAIN, argv[i], newArgsList());
         } else {
             if (list->len == 0 || list->tail->operator != OPERATOR_COMMAND) {
-                i++;
                 pushCommand(list, OPERATOR_COMMAND, argv[i], newArgsList());
+                i++;
             } else {
                 pushArg(list->tail->args, argv[i]);
                 i++;
